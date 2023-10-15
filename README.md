@@ -13,21 +13,7 @@
 
 AGiXT Chat is a React component for a user facing chat interface for AGiXT.
 
-## Run AGiXT Chat front end
-
-- If you don't already have AGiXT, [follow this link for instructions to set it up.](https://github.com/Josh-XT/AGiXT#quick-start-guide)
-- After you have run the AGiXT back end, follow these instructions below:
-
-```bash
-git clone https://github.com/AGiXT/chat
-cd chat
-npm install
-npm run dev
-```
-
-Access at <http://localhost:3000>
-
-## Use as a React Component
+## Usage
 
 ```javascript
 import AGiXTChat from "agixtchat";
