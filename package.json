@@ -1,6 +1,6 @@
 {
   "name": "agixtchat",
-  "version": "0.0.3.1",
+  "version": "0.0.4",
   "description": "AGiXT Chat is a React component for a user facing chat interface for AGiXT.",
   "main": "AGiXTChat.js",
   "scripts": {
