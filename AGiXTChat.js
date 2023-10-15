@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConversationHistory from "./conversation/ConversationHistory";
 import AudioRecorder from "./conversation/AudioRecorder";
 import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
