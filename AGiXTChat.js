@@ -316,132 +316,127 @@ export default function AGiXTChat({
     }
   };
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <MenuDarkSwitch checked={darkMode} onChange={handleToggleDarkMode} />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            marginTop: `${topMargin}px`,
-            marginRight: "1px",
-            marginLeft: "1px",
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <MenuDarkSwitch checked={darkMode} onChange={handleToggleDarkMode} />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          marginTop: `${topMargin}px`,
+          marginRight: "1px",
+          marginLeft: "1px",
+        }}
+      >
+        <main
+          style={{
+            maxWidth: "100%",
+            flexGrow: 1,
+            transition: theme.transitions.create("margin", {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
           }}
         >
-          <main
-            style={{
-              maxWidth: "100%",
-              flexGrow: 1,
-              transition: theme.transitions.create("margin", {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-              }),
+          <ConversationHistory
+            agentName={agentName}
+            chatHistory={chatHistory}
+            isLoading={isLoading}
+            sdk={sdk}
+            topMargin={topMargin}
+          />
+          <TextField
+            label="Ask your question here."
+            placeholder="Ask your question here."
+            multiline
+            rows={2}
+            fullWidth
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            sx={{ mb: 2 }}
+            disabled={isLoading}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {enableFileUpload && (
+                    <>
+                      <IconButton
+                        variant="contained"
+                        color="info"
+                        onClick={() => {
+                          setUploadedFiles([]);
+                          setOpenFileUpload(true);
+                        }}
+                        disabled={isLoading}
+                        sx={{ height: "56px" }}
+                      >
+                        <NoteAddOutlinedIcon />
+                      </IconButton>
+                      <Dialog
+                        open={openFileUpload}
+                        onClose={handleCloseFileUpload}
+                      >
+                        <DialogTitle id="form-dialog-title">
+                          Upload Files
+                        </DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            Please upload the files you would like to send.
+                          </DialogContentText>
+                          <input
+                            accept="*"
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                            onChange={(e) => {
+                              setUploadedFiles(e.target.files);
+                            }}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleCloseFileUpload} color="error">
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={handleUploadFiles}
+                            color="info"
+                            disabled={isLoading}
+                          >
+                            Upload
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                    </>
+                  )}
+                  {!isLoading && (
+                    <>
+                      <IconButton
+                        variant="contained"
+                        color="info"
+                        onClick={handleSendMessage}
+                        sx={{ height: "56px", padding: "0px" }}
+                      >
+                        <SendIcon />
+                      </IconButton>
+                    </>
+                  )}
+                  <AudioRecorder
+                    conversationName={conversationName}
+                    contextResults={contextResults}
+                    conversationResults={conversationResults}
+                    setIsLoading={setIsLoading}
+                    agentName={agentName}
+                    sdk={sdk}
+                  />
+                </InputAdornment>
+              ),
             }}
-          >
-            <ConversationHistory
-              agentName={agentName}
-              chatHistory={chatHistory}
-              isLoading={isLoading}
-              sdk={sdk}
-              topMargin={topMargin}
-            />
-            <TextField
-              label="Ask your question here."
-              placeholder="Ask your question here."
-              multiline
-              rows={2}
-              fullWidth
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              sx={{ mb: 2 }}
-              disabled={isLoading}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    {enableFileUpload && (
-                      <>
-                        <IconButton
-                          variant="contained"
-                          color="info"
-                          onClick={() => {
-                            setUploadedFiles([]);
-                            setOpenFileUpload(true);
-                          }}
-                          disabled={isLoading}
-                          sx={{ height: "56px" }}
-                        >
-                          <NoteAddOutlinedIcon />
-                        </IconButton>
-                        <Dialog
-                          open={openFileUpload}
-                          onClose={handleCloseFileUpload}
-                        >
-                          <DialogTitle id="form-dialog-title">
-                            Upload Files
-                          </DialogTitle>
-                          <DialogContent>
-                            <DialogContentText>
-                              Please upload the files you would like to send.
-                            </DialogContentText>
-                            <input
-                              accept="*"
-                              id="contained-button-file"
-                              multiple
-                              type="file"
-                              onChange={(e) => {
-                                setUploadedFiles(e.target.files);
-                              }}
-                            />
-                          </DialogContent>
-                          <DialogActions>
-                            <Button
-                              onClick={handleCloseFileUpload}
-                              color="error"
-                            >
-                              Cancel
-                            </Button>
-                            <Button
-                              onClick={handleUploadFiles}
-                              color="info"
-                              disabled={isLoading}
-                            >
-                              Upload
-                            </Button>
-                          </DialogActions>
-                        </Dialog>
-                      </>
-                    )}
-                    {!isLoading && (
-                      <>
-                        <IconButton
-                          variant="contained"
-                          color="info"
-                          onClick={handleSendMessage}
-                          sx={{ height: "56px", padding: "0px" }}
-                        >
-                          <SendIcon />
-                        </IconButton>
-                      </>
-                    )}
-                    <AudioRecorder
-                      conversationName={conversationName}
-                      contextResults={contextResults}
-                      conversationResults={conversationResults}
-                      setIsLoading={setIsLoading}
-                      agentName={agentName}
-                      sdk={sdk}
-                    />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </main>
-        </Box>
-      </ThemeProvider>
-    </>
+          />
+        </main>
+      </Box>
+    </ThemeProvider>
   );
 }
