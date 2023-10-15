@@ -1,0 +1,8 @@
+// .babelrc
+{
+    "plugins": [
+      ["@babel/plugin-transform-typescript", {
+        "isTSX": true
+      }]
+    ]
+  }
