@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import AGiXTSDK from "agixt";
+import "./globals.css";
 
 import {
   Button,
