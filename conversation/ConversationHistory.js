@@ -28,7 +28,7 @@ export default function ConversationHistory({
   sdk,
   topMargin,
 }) {
-  const topPx = topMargin + 59;
+  const topPx = Number(topMargin) + 129;
   const marginTop = `${topPx}px`;
 
   let lastUserMessage = ""; // track the last user message
